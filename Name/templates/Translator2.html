@@ -124,10 +124,19 @@ font-size:16px;
   background-color:#ff414e;
 }
 
-select{
-  display: none;
+.select-container {
   margin: 50px auto;
   width: 400px;
+}
+
+select{
+  display: none;
+  width: 100%;
+}
+
+#colnum {
+  color: white;
+  font-size: 20px;
 }
 
 
@@ -147,7 +156,10 @@ select{
     <a id="showList" class="btnSelectColumns">Select Columns</a>
     <button type="submit" class="btnRunFile"><b>Run File</b></button>
     <br />
-    <select required multiple="multiple" name="columns" id="columns"></select>
+    <div class="select-container">
+      <h2 id ="colnum" style="display: none;">Number of Colnums:</h2>
+      <select required multiple="multiple" name="columns" id="columns"></select>
+    </div>
   </form>
 
   <!-- <button onclick="this.setAttr('display', 'none')" class="btnSelectColumns"><b>Select Columns</b></button> -->
@@ -163,10 +175,13 @@ select{
         data[0].forEach(item => {
           selectEl.innerHTML += `<option value="${item}">${item}</option>`;
         })
+        const colnumEl = document.getElementById('colnum');
+        colnumEl.innerText += ` ${data[0].length}`;
         const showListEl = document.getElementById('showList');
         showListEl.addEventListener('click', function (event) {
           event.preventDefault();
           selectEl.style.display = 'block';
+          colnumEl.style.display = 'block';
       })
     })})
   </script>
