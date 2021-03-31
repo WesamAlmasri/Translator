@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>Translator</title>
+  </head>
+  <body>
+    <body style="background-color: #161748;">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-4 pb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Translator</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="About">About Us</a>
+        </li>
+    </nav>
+    <head>
+<style>
+  body {
+  margin:0;
+}
+      </style>
+<style>
+
+
+.navbar-brand{
+  font-size: 26px;
+}
+
+.nav-link active{
+  font-size: 26px;
+}
+
+.nav-link{
+font-size: 26px;
+}
+
+.upload-box{
+  font-size:16px;
+  background:white;
+  border-radius:50px;
+  width:270px;
+  outline:none;
+  font-weight: bold;
+}
+
+::-webkit-file-upload-button{
+  color:black;
+  background: #FF0000;
+  padding:20px;
+  border:none;
+  border-radius:40px;
+  outline:none;
+}
+
+::-webkit-file-upload-button:hover{
+  background:#438a5e;
+}
+
+.btnSelectColumns
+{
+ font-size:16px;
+ height:68px;
+ padding: 25px 80px;
+  background-color:#FFA500;
+  border-radius:50px;
+  color:black;
+  width:270px;
+  font-weight: 800;
+  text-decoration: none;
+  outline:none;
+
+
+}
+
+.btnSelectColumns:hover{
+  background-color:#DD4124;
+
+}
+
+.btnRunFile
+{
+  font-size:16px;
+ height:68px;
+  background-color:#FF6F61;
+  border-radius:50px;
+  color:black;
+  width:270px;
+  outline:none;
+}
+
+.btnRunFile:hover{
+  background-color:#008000;
+
+}
+
+.btnDownloadFile
+{
+
+font-size:16px;
+ height:68px;
+  background-color:#3AAFA9;
+  border-radius:50px;
+  color:black;
+  width:270px;
+  outline:none;
+}
+
+.btnDownloadFile:hover{
+  background-color:#ff414e;
+}
+
+select{
+  display: none;
+  margin: 50px auto;
+  width: 400px;
+}
+
+
+</style>
+</head>
+<body>
+
+ 
+</div>
+
+ </div>
+
+  </div>
+  <form method="POST" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+    <input id="file-input" type="file" name="file" class="upload-box" />
+    <a id="showList" class="btnSelectColumns">Select Columns</a>
+    <button type="submit" class="btnRunFile"><b>Run File</b></button>
+    <br />
+    <select required multiple="multiple" name="columns" id="columns"></select>
+  </form>
+
+  <!-- <button onclick="this.setAttr('display', 'none')" class="btnSelectColumns"><b>Select Columns</b></button> -->
+ 
+  <!-- <button onclick="myFunction()" class="btnDownloadFile"><b>Download File</b></button> -->
+  <script src="https://unpkg.com/read-excel-file@4.1.0/bundle/read-excel-file.min.js"></script>
+  <script>
+    const input = document.getElementById('file-input');
+    input.addEventListener('change', function (event) {
+      readXlsxFile(input.files[0]).then(function (data) {
+        const selectEl = document.getElementById('columns');
+        selectEl.innerHTML = '';
+        data[0].forEach(item => {
+          selectEl.innerHTML += `<option value="${item}">${item}</option>`;
+        })
+        const showListEl = document.getElementById('showList');
+        showListEl.addEventListener('click', function (event) {
+          event.preventDefault();
+          selectEl.style.display = 'block';
+      })
+    })})
+  </script>
+</body>
+</html>
